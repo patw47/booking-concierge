@@ -4,7 +4,6 @@ pipecat-ai[webrtc,runner]==1.4.0
 # Environment
 python-dotenv>=1.0.0
 
-# Google Sheets (Sprint 2)
+# Google Sheets — service account auth (no OAuth2 browser flow needed)
 google-api-python-client>=2.0
 google-auth-httplib2>=0.1.0
-google-auth-oauthlib>=0.5.0

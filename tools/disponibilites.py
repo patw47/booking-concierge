@@ -7,7 +7,8 @@ Sheet structure expected (configurable via GOOGLE_SHEET_RANGE):
   Column A: arrival date   (DD/MM/YYYY or YYYY-MM-DD)
   Column B: departure date (DD/MM/YYYY or YYYY-MM-DD)
 
-Auth: OAuth2 Desktop client — run once locally to generate token.json.
+Auth: service account property-cm-agent@property-cm.iam.gserviceaccount.com
+      Key file path set via GOOGLE_SERVICE_ACCOUNT_FILE env var. Headless, no browser.
 """
 
 import asyncio
@@ -19,13 +20,10 @@ from loguru import logger
 from pipecat.adapters.schemas.direct_function import tool_options
 from pipecat.services.llm_service import FunctionCallParams
 
-from google.auth.transport.requests import Request
-from google.oauth2.credentials import Credentials
-from google_auth_oauthlib.flow import InstalledAppFlow
+from google.oauth2 import service_account
 from googleapiclient.discovery import build
 
 _SCOPES = ["https://www.googleapis.com/auth/spreadsheets.readonly"]
-_TOKEN_PATH = Path(__file__).parent.parent / "token.json"
 
 
 def _parse_date(s: str) -> date | None:
@@ -39,17 +37,10 @@ def _parse_date(s: str) -> date | None:
 
 
 def _sheets_service():
-    creds_path = Path(os.environ.get("GOOGLE_CREDENTIALS_FILE", "credentials.json"))
-    creds = None
-    if _TOKEN_PATH.exists():
-        creds = Credentials.from_authorized_user_file(str(_TOKEN_PATH), _SCOPES)
-    if not creds or not creds.valid:
-        if creds and creds.expired and creds.refresh_token:
-            creds.refresh(Request())
-        else:
-            flow = InstalledAppFlow.from_client_secrets_file(str(creds_path), _SCOPES)
-            creds = flow.run_local_server(port=0)
-        _TOKEN_PATH.write_text(creds.to_json())
+    key_file = Path(os.environ.get("GOOGLE_SERVICE_ACCOUNT_FILE", "property-cm-agent-key.json"))
+    creds = service_account.Credentials.from_service_account_file(
+        str(key_file), scopes=_SCOPES
+    )
     return build("sheets", "v4", credentials=creds)
 
 

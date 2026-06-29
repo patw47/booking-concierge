@@ -3,7 +3,9 @@
 .env.*
 !.env.example
 
-# Google service account / OAuth tokens
+# Google service account key + OAuth tokens
+*-agent-key.json
+*.serviceaccount.json
 *-credentials.json
 token.json
 *_token.json

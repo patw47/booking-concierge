@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Villa Eden Bleu — Voice Concierge</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Georgia', serif;
+      background: linear-gradient(135deg, #0a4f6e 0%, #1a7a9a 50%, #2da5c5 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+    }
+    .card {
+      background: rgba(255,255,255,0.1);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 24px;
+      padding: 48px 40px;
+      max-width: 420px;
+      width: 100%;
+      text-align: center;
+    }
+    h1 { font-size: 1.8rem; margin-bottom: 6px; }
+    .subtitle { font-size: 0.95rem; opacity: 0.75; margin-bottom: 36px; }
+    #status { font-size: 0.85rem; opacity: 0.65; margin-bottom: 24px; min-height: 20px; }
+    button {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 32px;
+      border: none;
+      border-radius: 50px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: transform 0.1s, opacity 0.2s;
+    }
+    button:active { transform: scale(0.97); }
+    #btn-connect {
+      background: #fff;
+      color: #0a4f6e;
+      font-weight: 600;
+    }
+    #btn-disconnect {
+      background: rgba(255,255,255,0.15);
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.4);
+      display: none;
+    }
+    .pulse {
+      display: inline-block;
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      background: #4ade80;
+      animation: pulse 1.2s infinite;
+    }
+    @keyframes pulse { 0%,100% { opacity:1; } 50% { opacity:0.3; } }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Villa Eden Bleu</h1>
+    <p class="subtitle">Voice Concierge · Ask about availability, amenities &amp; booking</p>
+    <p id="status">Ready to connect</p>
+    <button id="btn-connect">🎙️ Talk to the concierge</button>
+    <button id="btn-disconnect"><span class="pulse"></span> Disconnect</button>
+  </div>
+
+  <script type="module">
+    // Uses the official Pipecat JS client + SmallWebRTC transport.
+    // For local dev the server is at http://localhost:7860.
+    // In production, replace BASE_URL with the VPS domain.
+    import { PipecatClient } from "https://esm.sh/@pipecat-ai/client-js@latest";
+    import { SmallWebRTCTransport } from "https://esm.sh/@pipecat-ai/small-webrtc-transport@latest";
+
+    const BASE_URL = window.location.origin;
+    const btnConnect = document.getElementById("btn-connect");
+    const btnDisconnect = document.getElementById("btn-disconnect");
+    const statusEl = document.getElementById("status");
+
+    const client = new PipecatClient({
+      transport: new SmallWebRTCTransport(),
+      enableCam: false,
+      enableMic: true,
+    });
+
+    client.on("connected", () => {
+      statusEl.textContent = "Connected — speak now";
+      btnConnect.style.display = "none";
+      btnDisconnect.style.display = "inline-flex";
+    });
+
+    client.on("disconnected", () => {
+      statusEl.textContent = "Disconnected";
+      btnConnect.style.display = "inline-flex";
+      btnDisconnect.style.display = "none";
+    });
+
+    client.on("error", (e) => {
+      statusEl.textContent = `Error: ${e.message ?? e}`;
+    });
+
+    btnConnect.onclick = async () => {
+      statusEl.textContent = "Connecting…";
+      btnConnect.disabled = true;
+      try {
+        await client.connect({ webrtcUrl: `${BASE_URL}/api/offer` });
+      } catch (e) {
+        statusEl.textContent = `Failed: ${e.message}`;
+        btnConnect.disabled = false;
+      }
+    };
+
+    btnDisconnect.onclick = () => client.disconnect();
+  </script>
+</body>
+</html>

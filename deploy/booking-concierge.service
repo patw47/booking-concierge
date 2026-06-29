@@ -1,0 +1,15 @@
+[Unit]
+Description=Booking Concierge — Voice Agent (Pipecat + OpenAI Realtime)
+After=network.target
+
+[Service]
+Type=simple
+User=acer
+WorkingDirectory=/opt/apps/booking-concierge
+EnvironmentFile=/opt/apps/booking-concierge/.env
+ExecStart=/opt/apps/booking-concierge/.venv/bin/python bot.py --transport webrtc --host 0.0.0.0 --port 7861
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

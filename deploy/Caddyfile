@@ -1,0 +1,16 @@
+# Villa Eden Bleu — Voice Concierge
+# TLS auto via Let's Encrypt + Basic Auth for demo access
+
+concierge.yourdomain.com {
+    basicauth /* {
+        # Generate: caddy hash-password --plaintext <password>
+        demo $2a$14$REPLACE_WITH_HASHED_PASSWORD
+    }
+
+    reverse_proxy localhost:7861
+
+    log {
+        output file /var/log/caddy/booking-concierge.log
+        format json
+    }
+}

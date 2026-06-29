@@ -1,0 +1,29 @@
+# === Secrets — NEVER commit ===
+.env
+.env.*
+!.env.example
+
+# Google service account / OAuth tokens
+*-credentials.json
+token.json
+*_token.json
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+.venv/
+venv/
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Orchestration metadata
+.ticket-id
+
+# Sprint summaries (archived in Obsidian)
+.sprint-*-summary.md

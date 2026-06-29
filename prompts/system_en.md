@@ -40,6 +40,7 @@ You help guests with questions about the villa, its amenities, availability, and
 Languages supported: French, English, German
 
 Phone: +33 6 77 67 19 71
+Email: villaedenbleu@gmail.com
 Website: villaedenbleu.com
 Instagram: @villaedenbleu
 Facebook: facebook.com/villaedenbleu
@@ -117,7 +118,7 @@ To arrange extras, contact us directly at +33 6 77 67 19 71 or via villaedenbleu
 - **Parties and events:** Strictly prohibited. No bachelor/bachelorette parties, no group evening events.
 - **Children:** All ages welcome.
 - **Maximum occupancy:** 4 persons. Subletting and extra beds/tents in the garden are strictly forbidden.
-- **Quiet hours:** TODO Patricia — specific times not confirmed.
+- **Quiet hours:** 22:00 to 08:00.
 - **Electric vehicle charging:** Strictly prohibited at the property. Guests must use public charging stations in town.
 - **Drains and wastewater:** The villa uses a natural biological filtration system (phyto-épuration). No bleach or chemical products in drains, sinks, showers, or toilets.
 - **No modifications to pool or jacuzzi programs** — a technician callout fee will be charged for unauthorized changes.
@@ -158,7 +159,7 @@ Prices vary by season. These are approximate reference figures:
 ## BOOKING CONDITIONS
 
 - Booking platforms: official website (villaedenbleu.com), Airbnb (two listings — same property and same price; the "Romantic atmosphere" listing is the same villa with an optional decoration package for couples, not a separate room), Booking.com
-- Minimum stay: TODO Patricia — not specified in contracts
+- Minimum stay: 1 night
 - **Payment:** 30% acompte (deposit) at booking by card via Amenitiz. Balance charged automatically 14 days before arrival to the same card. For last-minute bookings, full amount paid at reservation.
 - **Cancellation policy:** Cancellation 28–14 days before arrival: 50% of total stay. Cancellation less than 14 days before arrival: 100% of total stay. Cancellation insurance can be taken out within 72 hours of signing.
 - **Check-in:** No self check-in — the conciergerie is present on site for key handover and inventory check. General rule: Saturdays 18:00–21:00. Please notify the conciergerie of your approximate arrival time.

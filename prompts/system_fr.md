@@ -40,6 +40,7 @@ Vous aidez les hôtes pour les questions sur le gîte, les équipements, les dis
 Langues parlées : Français, Anglais, Allemand
 
 Téléphone : +33 6 77 67 19 71
+E-mail : villaedenbleu@gmail.com
 Site web : villaedenbleu.com
 Instagram : @villaedenbleu
 Facebook : facebook.com/villaedenbleu
@@ -117,7 +118,7 @@ Pour organiser des suppléments, contactez-nous au +33 6 77 67 19 71 ou via vill
 - **Fêtes et événements :** Strictement interdits. Pas d'enterrement de vie de garçon/fille, pas de soirées de groupe.
 - **Enfants :** Tous âges acceptés.
 - **Capacité maximale :** 4 personnes. Sous-location et lits d'appoint/tentes dans le jardin strictement interdits.
-- **Heures de silence :** TODO Patricia — non précisées dans les contrats.
+- **Heures de silence :** 22h00 à 08h00.
 - **Recharge de véhicule électrique :** Strictement interdite sur la propriété. Les locataires doivent utiliser les bornes publiques en ville.
 - **Évacuations et eaux usées :** La villa utilise un système de phyto-épuration (filtration biologique naturelle). Aucun produit chloré ni chimique dans les évacuations, lavabos, douches ou toilettes.
 - **Aucune modification des programmes piscine/jacuzzi** — des frais d'intervention seront facturés en cas de modification non autorisée.
@@ -167,7 +168,7 @@ Les deux annonces Airbnb correspondent au même bien physique, 134 Rue des Glyci
 ## CONDITIONS DE RÉSERVATION
 
 - Plateformes : site officiel (villaedenbleu.com), Airbnb (deux annonces — même propriété, même tarif ; l'annonce « Ambiance romantique » est la même villa avec un pack décoration optionnel pour couples), Booking.com
-- Durée minimum de séjour : TODO Patricia — non précisée dans les contrats
+- Durée minimum de séjour : 1 nuit
 - **Paiement :** Acompte de 30 % à la réservation par carte via Amenitiz. Solde prélevé automatiquement 14 jours avant l'arrivée sur la même carte. Réservation de dernière minute : paiement intégral à la réservation.
 - **Politique d'annulation :** Annulation entre J-28 et J-14 : 50 % du montant total. Annulation à moins de J-14 : 100 % du montant total. Assurance annulation souscriptible dans les 72h suivant la signature.
 - **Arrivée :** Pas d'entrée autonome — la conciergerie est présente sur place pour la remise des clés et l'état des lieux d'entrée. Règle générale : le samedi entre 18h00 et 21h00. Prévenir la conciergerie de l'heure d'arrivée approximative.

@@ -71,8 +71,15 @@ else
     log "  Traefik config unchanged"
 fi
 
-# ── Step 5 — UFW: WebRTC media relay ─────────────────────────────────────────
+# ── Step 5 — UFW rules ───────────────────────────────────────────────────────
 log "Step 5: UFW rules"
+# Traefik (Docker 172.18.0.0/16) needs TCP access to the bot on port 7861.
+if ! sudo ufw status | grep -q "7861/tcp"; then
+    sudo ufw allow from 172.18.0.0/16 to any port 7861 proto tcp comment "Traefik to booking-concierge"
+    log "  UFW: 7861/tcp from Docker network opened"
+else
+    log "  UFW: 7861/tcp already open"
+fi
 # aiortc binds dynamic UDP ports for WebRTC media — browser needs to reach them.
 if ! sudo ufw status | grep -q "49152:65535/udp"; then
     sudo ufw allow 49152:65535/udp comment "WebRTC media relay"

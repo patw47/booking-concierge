@@ -1,6 +1,6 @@
 """
 booking-concierge — Voice concierge agent for Villa Eden Bleu.
-Sprint 2: tools wired (get_disponibilites → Google Sheet, creer_reservation → Telegram).
+Sprint 3: Pipecat Flows state machine + FR/EN language switching.
 
 Run:
     python bot.py --transport webrtc
@@ -35,6 +35,7 @@ from pipecat.workers.runner import WorkerRunner
 
 from tools.disponibilites import get_disponibilites
 from tools.reservation import creer_reservation
+from flows.booking_flow import BookingFlow
 
 # Serve the prebuilt browser UI at /client/
 from pipecat.runner.run import app
@@ -55,7 +56,11 @@ def _load_prompt(filename: str) -> str:
     return "\n".join(lines).strip()
 
 
-SYSTEM_PROMPT = _load_prompt("system_en.md")
+_PROMPTS = {
+    "en": _load_prompt("system_en.md"),
+    "fr": _load_prompt("system_fr.md"),
+}
+SYSTEM_PROMPT = _PROMPTS["en"]
 
 transport_params = {
     "webrtc": lambda: TransportParams(
@@ -66,6 +71,8 @@ transport_params = {
 
 
 async def run_bot(transport: BaseTransport, runner_args: RunnerArguments):
+    flow = BookingFlow()
+
     llm = OpenAIRealtimeLLMService(
         api_key=os.environ["OPENAI_API_KEY"],
         settings=OpenAIRealtimeLLMService.Settings(
@@ -82,9 +89,17 @@ async def run_bot(transport: BaseTransport, runner_args: RunnerArguments):
         ),
     )
 
+    switch_to_french, switch_to_english, end_conversation = flow.make_tools(llm, _PROMPTS)
+
     context = LLMContext(
         messages=[{"role": "developer", "content": "Greet the visitor briefly."}],
-        tools=[get_disponibilites, creer_reservation],
+        tools=[
+            get_disponibilites,
+            creer_reservation,
+            switch_to_french,
+            switch_to_english,
+            end_conversation,
+        ],
     )
 
     # realtime_service_mode=True is required — decouples local aggregator from

@@ -71,9 +71,6 @@
   </div>
 
   <script type="module">
-    // Uses the official Pipecat JS client + SmallWebRTC transport.
-    // For local dev the server is at http://localhost:7860.
-    // In production, replace BASE_URL with the VPS domain.
     import { PipecatClient } from "https://esm.sh/@pipecat-ai/client-js@latest";
     import { SmallWebRTCTransport } from "https://esm.sh/@pipecat-ai/small-webrtc-transport@latest";
 
@@ -82,40 +79,53 @@
     const btnDisconnect = document.getElementById("btn-disconnect");
     const statusEl = document.getElementById("status");
 
-    const client = new PipecatClient({
-      transport: new SmallWebRTCTransport(),
-      enableCam: false,
-      enableMic: true,
-    });
-
-    client.on("connected", () => {
-      statusEl.textContent = "Connected — speak now";
-      btnConnect.style.display = "none";
-      btnDisconnect.style.display = "inline-flex";
-    });
-
-    client.on("disconnected", () => {
-      statusEl.textContent = "Disconnected";
-      btnConnect.style.display = "inline-flex";
-      btnDisconnect.style.display = "none";
-    });
-
-    client.on("error", (e) => {
-      statusEl.textContent = `Error: ${e.message ?? e}`;
-    });
+    let client = null;
 
     btnConnect.onclick = async () => {
       statusEl.textContent = "Connecting…";
       btnConnect.disabled = true;
       try {
+        // Fetch ICE config from server — keeps TURN credentials server-side.
+        const iceResp = await fetch(`${BASE_URL}/api/ice-config`);
+        const { iceServers } = await iceResp.json();
+
+        client = new PipecatClient({
+          transport: new SmallWebRTCTransport({
+            iceServers,
+            waitForICEGathering: false,  // avoids ICE gather timeout on slow 4G
+          }),
+          enableCam: false,
+          enableMic: true,
+        });
+
+        client.on("connected", () => {
+          statusEl.textContent = "Connected — speak now";
+          btnConnect.style.display = "none";
+          btnDisconnect.style.display = "inline-flex";
+        });
+
+        client.on("disconnected", () => {
+          statusEl.textContent = "Disconnected";
+          btnConnect.style.display = "inline-flex";
+          btnConnect.disabled = false;
+          btnDisconnect.style.display = "none";
+          client = null;
+        });
+
+        client.on("error", (e) => {
+          statusEl.textContent = `Error: ${e.message ?? e}`;
+          btnConnect.disabled = false;
+        });
+
         await client.connect({ webrtcUrl: `${BASE_URL}/api/offer` });
       } catch (e) {
         statusEl.textContent = `Failed: ${e.message}`;
         btnConnect.disabled = false;
+        client = null;
       }
     };
 
-    btnDisconnect.onclick = () => client.disconnect();
+    btnDisconnect.onclick = () => client?.disconnect();
   </script>
 </body>
 </html>

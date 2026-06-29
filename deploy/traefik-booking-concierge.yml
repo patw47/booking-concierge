@@ -1,0 +1,35 @@
+# Traefik dynamic config — booking-concierge
+# Drop at: /root/infra/traefik/dynamic/booking-concierge.yml
+# Traefik hot-reloads automatically (file watcher enabled).
+#
+# Generate BasicAuth password:
+#   htpasswd -n demo       # prints demo:$apr1$...
+#   (install: sudo apt install apache2-utils)
+#
+# DNS: concierge.code-art.ch → 77.42.72.164 (before deploy)
+
+http:
+  middlewares:
+    booking-auth:
+      basicAuth:
+        users:
+          # Replace with output of: htpasswd -n demo
+          - "demo:$apr1$REPLACE_ME$REPLACE_ME_HASH"
+
+  routers:
+    booking-concierge:
+      rule: "Host(`concierge.code-art.ch`)"
+      entryPoints:
+        - websecure
+      tls:
+        certResolver: letsencrypt
+      middlewares:
+        - booking-auth
+      service: booking-concierge
+
+  services:
+    booking-concierge:
+      loadBalancer:
+        servers:
+          # host.docker.internal resolves to host gateway from Traefik container
+          - url: "http://172.18.0.1:7861"

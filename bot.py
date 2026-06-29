@@ -9,9 +9,11 @@ Run:
 
 import asyncio
 import os
+import time
 from pathlib import Path
 
 from dotenv import load_dotenv
+from fastapi.responses import HTMLResponse, JSONResponse
 from loguru import logger
 
 from pipecat.frames.frames import LLMRunFrame
@@ -37,11 +39,44 @@ from tools.disponibilites import get_disponibilites
 from tools.reservation import creer_reservation
 from flows.booking_flow import BookingFlow
 
-# Serve the prebuilt browser UI at /client/
+# FastAPI app — shared with Pipecat runner
 from pipecat.runner.run import app
 from pipecat_ai_prebuilt.frontend import PipecatPrebuiltUI
 
+# Prebuilt UI at /client/ (dev fallback); custom branded UI at /
 app.mount("/client", PipecatPrebuiltUI)
+
+_FRONTEND = Path(__file__).parent / "frontend" / "index.html"
+
+
+@app.get("/")
+async def index() -> HTMLResponse:
+    return HTMLResponse(_FRONTEND.read_text(encoding="utf-8"))
+
+
+@app.get("/api/ice-config")
+async def ice_config() -> JSONResponse:
+    """Return ICE server list to the browser.
+    Keeping TURN credentials server-side avoids exposing them in the HTML.
+    """
+    servers = []
+    stun = os.getenv("STUN_SERVER", "stun:stun.l.google.com:19302")
+    if stun:
+        servers.append({"urls": stun})
+    turn_host = os.getenv("TURN_HOST", "")
+    if turn_host:
+        turn_port = os.getenv("TURN_PORT", "3478")
+        turn_user = os.getenv("TURN_USER", "")
+        turn_cred = os.getenv("TURN_CREDENTIAL", "")
+        servers.append({
+            "urls": [
+                f"turn:{turn_host}:{turn_port}",
+                f"turns:{turn_host}:5349",
+            ],
+            "username": turn_user,
+            "credential": turn_cred,
+        })
+    return JSONResponse({"iceServers": servers})
 
 load_dotenv(override=True)
 
@@ -117,21 +152,26 @@ async def run_bot(transport: BaseTransport, runner_args: RunnerArguments):
         assistant_aggregator,
     ])
 
-    idle_timeout = int(os.getenv("SESSION_TIMEOUT_SECS", "300"))
+    idle_timeout = int(os.getenv("SESSION_TIMEOUT_SECS", "180"))
     worker = PipelineWorker(
         pipeline,
         params=PipelineParams(enable_metrics=True, enable_usage_metrics=True),
         idle_timeout_secs=idle_timeout,
     )
 
+    _session_start: float | None = None
+
     @transport.event_handler("on_client_connected")
     async def on_client_connected(transport, client):
+        nonlocal _session_start
+        _session_start = time.monotonic()
         logger.info("Client connected — starting pipeline")
         await worker.queue_frames([LLMRunFrame()])
 
     @transport.event_handler("on_client_disconnected")
     async def on_client_disconnected(transport, client):
-        logger.info("Client disconnected — stopping worker")
+        duration = round(time.monotonic() - (_session_start or 0))
+        logger.info(f"Client disconnected — session {duration}s — stopping worker")
         await worker.cancel()
 
     runner = WorkerRunner(handle_sigint=runner_args.handle_sigint)

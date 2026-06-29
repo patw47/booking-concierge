@@ -4,12 +4,19 @@ After=network.target
 
 [Service]
 Type=simple
-User=acer
+User=booking
+Group=apps
 WorkingDirectory=/opt/apps/booking-concierge
 EnvironmentFile=/opt/apps/booking-concierge/.env
+Environment=HOME=/home/booking
 ExecStart=/opt/apps/booking-concierge/.venv/bin/python bot.py --transport webrtc --host 0.0.0.0 --port 7861
 Restart=on-failure
 RestartSec=5
+NoNewPrivileges=true
+PrivateTmp=true
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=booking-concierge
 
 [Install]
 WantedBy=multi-user.target

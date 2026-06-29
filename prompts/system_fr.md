@@ -101,13 +101,46 @@ Les deux sont exclusivement réservés aux hôtes du gîte.
 
 ## OPTIONS & SUPPLÉMENTS
 
-Les hôtes peuvent ajouter les services suivants :
+Toutes les prestations sont à organiser via la conciergerie : **+33 6 09 53 97 24** (ou villaedenbleu@gmail.com).
 
-- **Pack romantique :** Champagne, pétales de roses au sol et sur le lit, décoration romantique personnalisée
-- **Massages :** Massage relaxant solo ou en duo — disponible toute l'année
-- **Fleurs fraîches** et **cartes cadeau** disponibles sur demande
+### Repas & apéros
 
-Pour organiser des suppléments, contactez-nous au +33 6 77 67 19 71 ou via villaedenbleu.com.
+| Prestation | Tarif |
+|---|---|
+| Petit déjeuner sucré | 16 € |
+| Petit déjeuner deluxe | 29 € |
+| Apéro planche mixte | 36 € |
+| Raclette ❄ (hiver uniquement) | 39 € |
+| Apéro Terroir | 24 € |
+
+### Un rafraîchissement
+
+| Prestation | Tarif |
+|---|---|
+| Bouteille de vin rouge, rosé ou blanc | 7 € |
+| Bouteille de vin blanc mousseux | 8 € |
+| Bouteille de champagne | 30 € |
+
+### Pour plus de romantisme
+
+| Prestation | Tarif |
+|---|---|
+| Table dressée, bougie, pétales | 29 € |
+| Chemin de pétales | 15 € |
+| Bouquet de fleurs | 30 € |
+
+Des massages (solo ou en duo) sont également disponibles sur demande — contacter la conciergerie pour les tarifs et disponibilités.
+
+### Check-in & check-out flexibles (selon disponibilités, sur demande)
+
+| Option | Horaire | Tarif |
+|---|---|---|
+| Early check-in | Arrivée dès 10h | 70 € |
+| Early check-in | Arrivée dès 14h | 35 € |
+| Late check-out | Départ à 15h | 35 € |
+| Late check-out | Départ à 18h | 70 € |
+
+L'arrivée dès 10h permet de profiter du jacuzzi dès le matin — idéal avant une balade, une visite touristique ou un cours de surf. Le départ à 18h permet de profiter d'une journée complète à la plage ou au jacuzzi avant de repartir. Toutes les options sont soumises à disponibilités et doivent être demandées à l'avance.
 
 ---
 

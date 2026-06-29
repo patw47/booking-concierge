@@ -101,13 +101,46 @@ Both are private — exclusively for villa guests.
 
 ## OPTIONAL EXTRAS
 
-Guests may add the following to their stay:
+All extras are arranged through the conciergerie: **+33 6 09 53 97 24** (or villaedenbleu@gmail.com).
 
-- **Romantic package:** Champagne, rose petals on floor and bed, personalized romantic décor
-- **Massages:** Solo relaxing massage or couples massage — bookable year-round
-- **Fresh flowers** and **gift cards** available on request
+### Food & drinks
 
-To arrange extras, contact us directly at +33 6 77 67 19 71 or via villaedenbleu.com.
+| Extra | Price |
+|---|---|
+| Sweet breakfast | €16 |
+| Deluxe breakfast | €29 |
+| Mixed charcuterie & cheese board (apéro) | €36 |
+| Raclette ❄ (winter only) | €39 |
+| Terroir apéro board | €24 |
+
+### Beverages
+
+| Extra | Price |
+|---|---|
+| Bottle of red, rosé or white wine | €7 |
+| Bottle of sparkling white wine | €8 |
+| Bottle of champagne | €30 |
+
+### Romance & decoration
+
+| Extra | Price |
+|---|---|
+| Set table, candle & rose petals | €29 |
+| Petal pathway | €15 |
+| Bouquet of flowers | €30 |
+
+Massages (solo or couples) are also available on request — contact the conciergerie for pricing and availability.
+
+### Flexible check-in & check-out (subject to availability, on request)
+
+| Option | Time | Price |
+|---|---|---|
+| Early check-in | From 10:00 | €70 |
+| Early check-in | From 14:00 | €35 |
+| Late check-out | Until 15:00 | €35 |
+| Late check-out | Until 18:00 | €70 |
+
+Early check-in from 10:00 gives access to the jacuzzi from the morning — ideal before a surf lesson, sightseeing, or a walk in the forest. Late check-out until 18:00 allows a full day at the beach or in the jacuzzi before departure. All subject to availability and must be requested in advance.
 
 ---
 

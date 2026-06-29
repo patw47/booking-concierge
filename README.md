@@ -138,6 +138,22 @@ Key facts:
 
 ---
 
+## Architecture decisions
+
+Non-obvious choices made during development — documented to avoid re-discovering them.
+
+**VPS reverse proxy: Traefik, not Caddy.** The VPS (hetzner-vps) runs Traefik v3 in Docker. All routing goes through `/root/infra/traefik/dynamic/` drop-in YAML files (hot-reload). Caddy is not installed. Service user: `booking`, group: `apps` — matching the pattern of other services on the VPS.
+
+**pipecat-ai-flows not used.** The library has no official support for `OpenAIRealtimeLLMService` (`context_aggregator` mismatch, server-side context not reset-able). Language switching and flow state are implemented via a custom `BookingFlow` state machine using `LLMUpdateSettingsFrame` → `session.update` on the OpenAI Realtime WebSocket.
+
+**Transcript capture limitation.** In Pipecat 1.4.0 + OpenAI Realtime, user speech produces `TranscriptionFrame` (final, reliable). Assistant speech produces `LLMTextFrame` fragments with no end-of-turn signal — these are accumulated and flushed on the next user turn or session end. No audio is ever stored.
+
+**WebRTC ICE: no default STUN.** `SmallWebRTCTransport` ships with an empty ICE server list on both Python and JS sides. The browser client fetches ICE config from `/api/ice-config` (TURN credentials stay server-side). VPS server needs no STUN — its host candidates are already public. UFW must open `49152:65535/udp` for aiortc media relay.
+
+**Observer registration.** `PipelineWorker(observers=[...])` — NOT `PipelineParams(observers=[...])`, which has no such field.
+
+---
+
 ## Rules
 
 - **One concurrent session max** in demo mode — no multi-tenant load balancing.

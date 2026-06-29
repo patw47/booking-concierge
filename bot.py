@@ -1,6 +1,6 @@
 """
-booking-concierge — Sprint 0: minimal WebRTC + OpenAI Realtime audio loop.
-No business logic. Validates audio pipeline before adding villa knowledge.
+booking-concierge — Voice concierge agent for Villa Eden Bleu.
+Sprint 1: system prompt loaded from prompts/system_en.md.
 
 Run:
     python bot.py --transport webrtc
@@ -9,6 +9,7 @@ Run:
 
 import asyncio
 import os
+from pathlib import Path
 
 from dotenv import load_dotenv
 from loguru import logger
@@ -39,10 +40,18 @@ app.mount("/client", PipecatPrebuiltUI)
 
 load_dotenv(override=True)
 
-SYSTEM_PROMPT = (
-    "You are a warm, concise voice assistant for Villa Eden Bleu, a holiday rental "
-    "in the south of France. Answer in English. Keep responses under 3 sentences."
-)
+_PROMPTS_DIR = Path(__file__).parent / "prompts"
+
+
+def _load_prompt(filename: str) -> str:
+    """Load prompt file and strip markdown comment lines (lines starting with #)."""
+    text = (_PROMPTS_DIR / filename).read_text(encoding="utf-8")
+    # Strip single-hash metadata lines (# comment) but keep ## section headers.
+    lines = [l for l in text.splitlines() if not (l.startswith("#") and not l.startswith("##"))]
+    return "\n".join(lines).strip()
+
+
+SYSTEM_PROMPT = _load_prompt("system_en.md")
 
 transport_params = {
     "webrtc": lambda: TransportParams(

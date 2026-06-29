@@ -1,6 +1,6 @@
 """
 booking-concierge — Voice concierge agent for Villa Eden Bleu.
-Sprint 1: system prompt loaded from prompts/system_en.md.
+Sprint 2: tools wired (get_disponibilites → Google Sheet, creer_reservation → Telegram).
 
 Run:
     python bot.py --transport webrtc
@@ -24,6 +24,7 @@ from pipecat.runner.utils import create_transport
 from pipecat.services.openai.realtime.events import (
     AudioConfiguration,
     AudioInput,
+    InputAudioNoiseReduction,
     InputAudioTranscription,
     SemanticTurnDetection,
     SessionProperties,
@@ -31,6 +32,9 @@ from pipecat.services.openai.realtime.events import (
 from pipecat.services.openai.realtime.llm import OpenAIRealtimeLLMService
 from pipecat.transports.base_transport import BaseTransport, TransportParams
 from pipecat.workers.runner import WorkerRunner
+
+from tools.disponibilites import get_disponibilites
+from tools.reservation import creer_reservation
 
 # Serve the prebuilt browser UI at /client/
 from pipecat.runner.run import app
@@ -70,9 +74,8 @@ async def run_bot(transport: BaseTransport, runner_args: RunnerArguments):
                 audio=AudioConfiguration(
                     input=AudioInput(
                         transcription=InputAudioTranscription(),
-                        # Server-side semantic VAD — more accurate than local VAD
-                        # for natural conversational speech.
                         turn_detection=SemanticTurnDetection(),
+                        noise_reduction=InputAudioNoiseReduction(type="near_field"),
                     )
                 ),
             ),
@@ -81,6 +84,7 @@ async def run_bot(transport: BaseTransport, runner_args: RunnerArguments):
 
     context = LLMContext(
         messages=[{"role": "developer", "content": "Greet the visitor briefly."}],
+        tools=[get_disponibilites, creer_reservation],
     )
 
     # realtime_service_mode=True is required — decouples local aggregator from

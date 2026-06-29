@@ -60,11 +60,9 @@ Facebook: facebook.com/villaedenbleu
 
 ## POOL & SPA
 
-- **Heated private pool:** 26°C, outdoor, south-facing terrace. Open June to September.
-  Pool is inaccessible from mid-September to mid-May for seasonal maintenance.
-  Multicolor programmable underwater lighting.
+- **Heated private pool:** 22–27°C (temperature varies with weather; target ~26°C), outdoor, south-facing terrace. Open May to September. Pool is inaccessible from mid-September to mid-May for seasonal maintenance. Multicolor programmable underwater lighting. Do not modify the heat pump program.
 
-- **Private jacuzzi:** 37°C. Available 24 hours a day, 7 days a week, year-round.
+- **Private jacuzzi:** 37°C. Available 24 hours a day, 7 days a week, year-round, outdoors under a canopy. Usage rules: mandatory shower before entering; replace cover after each use; maximum 30 minutes per session; no foam bath products, shower gels, or body oils in the water; not suitable for children, pregnant women, or immunocompromised persons; no animals in the jacuzzi.
 
 Both are private — exclusively for villa guests.
 
@@ -115,11 +113,14 @@ To arrange extras, contact us directly at +33 6 77 67 19 71 or via villaedenbleu
 ## HOUSE RULES
 
 - **Smoking:** Not permitted inside. An ashtray is provided on the terrace.
-- **Pets:** Welcome. An additional cleaning fee may apply if damage occurs.
+- **Pets:** 1 pet accepted. Pets are not permitted in the pool or jacuzzi. An additional cleaning fee may apply if damage occurs.
 - **Parties and events:** Strictly prohibited. No bachelor/bachelorette parties, no group evening events.
 - **Children:** All ages welcome.
-- **Maximum occupancy:** 4 persons.
-- **Quiet hours:** TODO Patricia — please confirm.
+- **Maximum occupancy:** 4 persons. Subletting and extra beds/tents in the garden are strictly forbidden.
+- **Quiet hours:** TODO Patricia — specific times not confirmed.
+- **Electric vehicle charging:** Strictly prohibited at the property. Guests must use public charging stations in town.
+- **Drains and wastewater:** The villa uses a natural biological filtration system (phyto-épuration). No bleach or chemical products in drains, sinks, showers, or toilets.
+- **No modifications to pool or jacuzzi programs** — a technician callout fee will be charged for unauthorized changes.
 
 ---
 
@@ -147,8 +148,8 @@ Prices vary by season. These are approximate reference figures:
 
 - Nightly rate from approximately €210–€220/night (varies by date)
 - Cleaning fee: €60
-- Security deposit (caution): €500
-- Tourist tax (taxe de séjour): €2.60 per adult per night (4-star, Biscarrosse 2025 rate)
+- Security deposit (caution): €800 blocked on card via Amenitiz platform, released 1 week after departure if no incidents
+- Tourist tax (taxe de séjour): included in the rental price
 
 **Always add:** "These are indicative figures. For an exact quote and to check real-time availability, please visit villaedenbleu.com or call us at +33 6 77 67 19 71."
 
@@ -156,10 +157,12 @@ Prices vary by season. These are approximate reference figures:
 
 ## BOOKING CONDITIONS
 
-- Booking platforms: official website (villaedenbleu.com), Airbnb (two listings — same property), Booking.com
-- Minimum stay: TODO Patricia — please confirm (varies by season?)
-- Cancellation policy: TODO Patricia — please confirm
-- Payment conditions (deposit / arrhes): TODO Patricia — please confirm
+- Booking platforms: official website (villaedenbleu.com), Airbnb (two listings — same property and same price; the "Romantic atmosphere" listing is the same villa with an optional decoration package for couples, not a separate room), Booking.com
+- Minimum stay: TODO Patricia — not specified in contracts
+- **Payment:** 30% acompte (deposit) at booking by card via Amenitiz. Balance charged automatically 14 days before arrival to the same card. For last-minute bookings, full amount paid at reservation.
+- **Cancellation policy:** Cancellation 28–14 days before arrival: 50% of total stay. Cancellation less than 14 days before arrival: 100% of total stay. Cancellation insurance can be taken out within 72 hours of signing.
+- **Check-in:** No self check-in — the conciergerie is present on site for key handover and inventory check. General rule: Saturdays 18:00–21:00. Please notify the conciergerie of your approximate arrival time.
+- **Check-out:** 10:00–11:00. The conciergerie performs the departure inventory check.
 - Instant confirmation available on Booking.com
 
 ---

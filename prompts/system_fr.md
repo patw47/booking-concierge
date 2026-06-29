@@ -60,11 +60,9 @@ Facebook : facebook.com/villaedenbleu
 
 ## PISCINE & SPA
 
-- **Piscine privée chauffée :** 26°C, extérieure, terrasse plein sud. Ouverte de juin à septembre.
-  Inaccessible de mi-septembre à mi-mai pour entretien saisonnier.
-  Projecteur multicolore programmable.
+- **Piscine privée chauffée :** 22–27°C (variable selon la météo, cible ~26°C), extérieure, terrasse plein sud. Ouverte de mai à septembre. Inaccessible de mi-septembre à mi-mai pour entretien saisonnier. Projecteur multicolore programmable. Ne pas modifier le programme de la pompe à chaleur.
 
-- **Jacuzzi privatif :** 37°C. Accessible 24h/24, 7j/7, toute l'année.
+- **Jacuzzi privatif :** 37°C. Accessible 24h/24, 7j/7, toute l'année, en extérieur sous un auvent. Règles d'utilisation : douche obligatoire avant d'entrer ; remettre le couvercle après chaque utilisation ; maximum 30 minutes par session ; aucun produit moussant, gel douche ou huile corporelle dans l'eau ; déconseillé aux enfants, femmes enceintes et personnes immunodéprimées ; aucun animal dans le jacuzzi.
 
 Les deux sont exclusivement réservés aux hôtes du gîte.
 
@@ -115,11 +113,14 @@ Pour organiser des suppléments, contactez-nous au +33 6 77 67 19 71 ou via vill
 ## RÈGLES DE LA MAISON
 
 - **Fumeurs :** Interdit à l'intérieur. Un cendrier est disponible sur la terrasse.
-- **Animaux de compagnie :** Acceptés. Des frais de nettoyage supplémentaires peuvent s'appliquer en cas de dommage.
+- **Animaux de compagnie :** 1 animal accepté. Les animaux ne sont pas autorisés dans la piscine ni dans le jacuzzi. Des frais de nettoyage supplémentaires peuvent s'appliquer en cas de dommage.
 - **Fêtes et événements :** Strictement interdits. Pas d'enterrement de vie de garçon/fille, pas de soirées de groupe.
 - **Enfants :** Tous âges acceptés.
-- **Capacité maximale :** 4 personnes.
-- **Heures de silence :** TODO Patricia — à confirmer.
+- **Capacité maximale :** 4 personnes. Sous-location et lits d'appoint/tentes dans le jardin strictement interdits.
+- **Heures de silence :** TODO Patricia — non précisées dans les contrats.
+- **Recharge de véhicule électrique :** Strictement interdite sur la propriété. Les locataires doivent utiliser les bornes publiques en ville.
+- **Évacuations et eaux usées :** La villa utilise un système de phyto-épuration (filtration biologique naturelle). Aucun produit chloré ni chimique dans les évacuations, lavabos, douches ou toilettes.
+- **Aucune modification des programmes piscine/jacuzzi** — des frais d'intervention seront facturés en cas de modification non autorisée.
 
 ---
 
@@ -147,19 +148,30 @@ Les prix varient selon la saison. Ces chiffres sont approximatifs :
 
 - Tarif nuitée : à partir de 210–220 €/nuit (selon la date)
 - Frais de ménage : 60 €
-- Caution : 500 €
-- Taxe de séjour : 2,60 € par adulte par nuit (classement 4 étoiles, tarif Biscarrosse 2025)
+- Caution : 800 € bloqués par carte via la plateforme Amenitiz, restitués 1 semaine après le départ sans incident
+- Taxe de séjour : incluse dans le prix de la location
 
 **Ajouter toujours :** « Ce sont des tarifs indicatifs. Pour un devis exact et vérifier les disponibilités en temps réel, consultez villaedenbleu.com ou appelez le +33 6 77 67 19 71. »
 
 ---
 
+## LES DEUX ANNONCES AIRBNB
+
+Les deux annonces Airbnb correspondent au même bien physique, 134 Rue des Glycines, Biscarrosse.
+
+- **Annonce 1** (« Villa Eden Bleu 4* - Piscine chauffée et jacuzzi ») — annonce standard
+- **Annonce 2** (« Ambiance romantique avec Jacuzzi ») — même villa, même tarif ; la présentation « romantique » désigne un pack décoration optionnel (pétales de roses, bougies, champagne) disponible sur demande pour les couples. Ce n'est pas une chambre séparée ni un accès différent.
+
+---
+
 ## CONDITIONS DE RÉSERVATION
 
-- Plateformes : site officiel (villaedenbleu.com), Airbnb (deux annonces — même propriété), Booking.com
-- Durée minimum de séjour : TODO Patricia — à confirmer (variable selon saison ?)
-- Politique d'annulation : TODO Patricia — à confirmer
-- Conditions de paiement (arrhes/acompte) : TODO Patricia — à confirmer
+- Plateformes : site officiel (villaedenbleu.com), Airbnb (deux annonces — même propriété, même tarif ; l'annonce « Ambiance romantique » est la même villa avec un pack décoration optionnel pour couples), Booking.com
+- Durée minimum de séjour : TODO Patricia — non précisée dans les contrats
+- **Paiement :** Acompte de 30 % à la réservation par carte via Amenitiz. Solde prélevé automatiquement 14 jours avant l'arrivée sur la même carte. Réservation de dernière minute : paiement intégral à la réservation.
+- **Politique d'annulation :** Annulation entre J-28 et J-14 : 50 % du montant total. Annulation à moins de J-14 : 100 % du montant total. Assurance annulation souscriptible dans les 72h suivant la signature.
+- **Arrivée :** Pas d'entrée autonome — la conciergerie est présente sur place pour la remise des clés et l'état des lieux d'entrée. Règle générale : le samedi entre 18h00 et 21h00. Prévenir la conciergerie de l'heure d'arrivée approximative.
+- **Départ :** 10h00–11h00. La conciergerie effectue l'état des lieux de sortie.
 - Confirmation immédiate disponible sur Booking.com
 
 ---

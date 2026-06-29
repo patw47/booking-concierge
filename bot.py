@@ -9,6 +9,7 @@ Run:
 
 import asyncio
 import os
+import secrets
 import time
 from pathlib import Path
 
@@ -38,6 +39,10 @@ from pipecat.workers.runner import WorkerRunner
 from tools.disponibilites import get_disponibilites
 from tools.reservation import creer_reservation
 from flows.booking_flow import BookingFlow
+from transcript_observer import TranscriptObserver
+from event_logger import setup_event_log
+
+_LOG_DIR = Path(__file__).parent / "var" / "logs"
 
 # FastAPI app — shared with Pipecat runner
 from pipecat.runner.run import app
@@ -152,9 +157,13 @@ async def run_bot(transport: BaseTransport, runner_args: RunnerArguments):
         assistant_aggregator,
     ])
 
+    session_id = f"{time.strftime('%Y%m%d-%H%M%S')}-{secrets.token_hex(3)}"
+    transcript_obs = TranscriptObserver(session_id, _LOG_DIR)
+
     idle_timeout = int(os.getenv("SESSION_TIMEOUT_SECS", "180"))
     worker = PipelineWorker(
         pipeline,
+        observers=[transcript_obs],
         params=PipelineParams(enable_metrics=True, enable_usage_metrics=True),
         idle_timeout_secs=idle_timeout,
     )
@@ -165,13 +174,14 @@ async def run_bot(transport: BaseTransport, runner_args: RunnerArguments):
     async def on_client_connected(transport, client):
         nonlocal _session_start
         _session_start = time.monotonic()
-        logger.info("Client connected — starting pipeline")
+        logger.info(f"[session:{session_id}] client connected")
         await worker.queue_frames([LLMRunFrame()])
 
     @transport.event_handler("on_client_disconnected")
     async def on_client_disconnected(transport, client):
         duration = round(time.monotonic() - (_session_start or 0))
-        logger.info(f"Client disconnected — session {duration}s — stopping worker")
+        logger.info(f"[session:{session_id}] client disconnected — {duration}s")
+        await transcript_obs.flush_pending()
         await worker.cancel()
 
     runner = WorkerRunner(handle_sigint=runner_args.handle_sigint)
@@ -181,6 +191,8 @@ async def run_bot(transport: BaseTransport, runner_args: RunnerArguments):
 
 async def bot(runner_args: RunnerArguments):
     """Entry point — also compatible with Pipecat Cloud."""
+    retention = int(os.getenv("LOG_RETENTION_DAYS", "30"))
+    setup_event_log(_LOG_DIR, retention)
     transport = await create_transport(runner_args, transport_params)
     await run_bot(transport, runner_args)
 

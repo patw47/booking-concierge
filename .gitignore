@@ -29,3 +29,6 @@ Thumbs.db
 
 # Sprint summaries (archived in Obsidian)
 .sprint-*-summary.md
+
+# Local logs — transcripts contain PII (name + email of guests)
+var/

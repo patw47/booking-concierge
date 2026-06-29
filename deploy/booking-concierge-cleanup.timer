@@ -1,0 +1,11 @@
+[Unit]
+Description=Daily log purge for booking-concierge
+Requires=booking-concierge-cleanup.service
+
+[Timer]
+OnCalendar=daily
+Persistent=true
+RandomizedDelaySec=300
+
+[Install]
+WantedBy=timers.target

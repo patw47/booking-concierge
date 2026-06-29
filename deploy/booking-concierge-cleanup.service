@@ -1,0 +1,13 @@
+[Unit]
+Description=Booking Concierge — purge log files older than LOG_RETENTION_DAYS
+
+[Service]
+Type=oneshot
+User=booking
+Group=apps
+Environment=LOG_DIR=/opt/apps/booking-concierge/var/logs
+Environment=LOG_RETENTION_DAYS=30
+ExecStart=/bin/bash /opt/apps/booking-concierge/deploy/cleanup_logs.sh
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=booking-concierge-cleanup

@@ -38,6 +38,7 @@ from pipecat.observers.base_observer import BaseObserver, FramePushed
 
 class TranscriptObserver(BaseObserver):
     def __init__(self, session_id: str, log_dir: Path) -> None:
+        super().__init__()
         self._enabled = os.getenv("TRANSCRIPT_LOGGING", "1") == "1"
         self._path = log_dir / f"transcript-{session_id}.jsonl"
         self._assistant_buf: list[str] = []

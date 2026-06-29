@@ -132,7 +132,7 @@ async def run_bot(transport: BaseTransport, runner_args: RunnerArguments):
     switch_to_french, switch_to_english, end_conversation = flow.make_tools(llm, _PROMPTS)
 
     context = LLMContext(
-        messages=[{"role": "developer", "content": "Greet the visitor briefly."}],
+        messages=[],
         tools=[
             get_disponibilites,
             creer_reservation,

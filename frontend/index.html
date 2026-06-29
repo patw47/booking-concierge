@@ -69,63 +69,100 @@
     <button id="btn-connect">🎙️ Talk to the concierge</button>
     <button id="btn-disconnect"><span class="pulse"></span> Disconnect</button>
   </div>
+  <audio id="bot-audio" autoplay playsinline style="display:none"></audio>
 
-  <script type="module">
-    import { PipecatClient } from "https://esm.sh/@pipecat-ai/client-js@latest";
-    import { SmallWebRTCTransport } from "https://esm.sh/@pipecat-ai/small-webrtc-transport@latest";
-
+  <script>
     const BASE_URL = window.location.origin;
-    const btnConnect = document.getElementById("btn-connect");
-    const btnDisconnect = document.getElementById("btn-disconnect");
-    const statusEl = document.getElementById("status");
+    const btnConnect = document.getElementById('btn-connect');
+    const btnDisconnect = document.getElementById('btn-disconnect');
+    const statusEl = document.getElementById('status');
+    const botAudio = document.getElementById('bot-audio');
 
-    let client = null;
+    let pc = null;
+    let pcId = null;
+
+    function setStatus(msg) { statusEl.textContent = msg; }
+
+    function onDisconnected() {
+      if (pc) { pc.close(); pc = null; }
+      pcId = null;
+      botAudio.srcObject = null;
+      btnConnect.style.display = 'inline-flex';
+      btnConnect.disabled = false;
+      btnDisconnect.style.display = 'none';
+      setStatus('Disconnected');
+    }
 
     btnConnect.onclick = async () => {
-      statusEl.textContent = "Connecting…";
       btnConnect.disabled = true;
+      setStatus('Requesting microphone…');
       try {
-        // Fetch ICE config from server — keeps TURN credentials server-side.
-        const iceResp = await fetch(`${BASE_URL}/api/ice-config`);
-        const { iceServers } = await iceResp.json();
+        // Microphone access first (user gesture already consumed by click)
+        const stream = await navigator.mediaDevices.getUserMedia({ audio: true, video: false });
 
-        client = new PipecatClient({
-          transport: new SmallWebRTCTransport({
-            iceServers,
-            waitForICEGathering: false,  // avoids ICE gather timeout on slow 4G
-          }),
-          enableCam: false,
-          enableMic: true,
+        setStatus('Fetching ICE configuration…');
+        const { iceServers } = await fetch(`${BASE_URL}/api/ice-config`).then(r => r.json());
+
+        pc = new RTCPeerConnection({ iceServers });
+
+        // Play bot audio as soon as a track arrives
+        pc.ontrack = e => {
+          if (e.streams && e.streams[0]) {
+            botAudio.srcObject = e.streams[0];
+            botAudio.play().catch(() => {});
+          }
+        };
+
+        pc.onconnectionstatechange = () => {
+          if (pc.connectionState === 'connected') {
+            setStatus('Connected — speak now');
+            btnConnect.style.display = 'none';
+            btnDisconnect.style.display = 'inline-flex';
+          } else if (['disconnected', 'failed', 'closed'].includes(pc.connectionState)) {
+            onDisconnected();
+          }
+        };
+
+        // Add mic track — creates sendrecv transceiver so we also receive bot audio
+        stream.getTracks().forEach(track => pc.addTrack(track, stream));
+
+        setStatus('Gathering ICE candidates…');
+        const offer = await pc.createOffer();
+        await pc.setLocalDescription(offer);
+
+        // Wait for ICE gathering to finish (max 10 s) before sending offer
+        await new Promise(resolve => {
+          if (pc.iceGatheringState === 'complete') { resolve(); return; }
+          pc.onicegatheringstatechange = () => {
+            if (pc.iceGatheringState === 'complete') resolve();
+          };
+          setTimeout(resolve, 10000);
         });
 
-        client.on("connected", () => {
-          statusEl.textContent = "Connected — speak now";
-          btnConnect.style.display = "none";
-          btnDisconnect.style.display = "inline-flex";
+        setStatus('Connecting to concierge…');
+        const resp = await fetch(`${BASE_URL}/api/offer`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ sdp: pc.localDescription.sdp, type: pc.localDescription.type }),
         });
 
-        client.on("disconnected", () => {
-          statusEl.textContent = "Disconnected";
-          btnConnect.style.display = "inline-flex";
-          btnConnect.disabled = false;
-          btnDisconnect.style.display = "none";
-          client = null;
-        });
+        if (!resp.ok) { throw new Error(`Server error ${resp.status}`); }
+        const answer = await resp.json();
+        pcId = answer.pc_id;
 
-        client.on("error", (e) => {
-          statusEl.textContent = `Error: ${e.message ?? e}`;
-          btnConnect.disabled = false;
-        });
+        await pc.setRemoteDescription({ sdp: answer.sdp, type: answer.type });
 
-        await client.connect({ webrtcUrl: `${BASE_URL}/api/offer` });
       } catch (e) {
-        statusEl.textContent = `Failed: ${e.message}`;
+        setStatus(`Error: ${e.message}`);
+        if (pc) { pc.close(); pc = null; }
         btnConnect.disabled = false;
-        client = null;
       }
     };
 
-    btnDisconnect.onclick = () => client?.disconnect();
+    btnDisconnect.onclick = () => {
+      if (pc) { pc.close(); }
+      onDisconnected();
+    };
   </script>
 </body>
 </html>
